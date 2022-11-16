@@ -1,0 +1,44 @@
+<mvc:View controllerName="molinje.basfchat.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <customHeader>
+            <OverflowToolbar>
+                <content>
+                    <ToolbarSpacer />
+                    <Title text="Team Chat" />
+                    <ToolbarSpacer />
+                </content>
+            </OverflowToolbar>
+        </customHeader>
+        <content>
+            <SplitContainer initialMaster="master" initialDetail="DetailChat">
+                <detailPages>
+                    <Page id="DetailChat">
+                        <List showSeparators="Inner" items="{path: 'ModelMessg>/',  sorter: {
+            path: 'date',
+            ascending: true
+        } }">
+                            <FeedListItem
+                                icon="{ModelMessg>imageContact}"
+                                iconDensityAware="false"
+                                iconInitials="{ModelMessg>me}"
+                                text="{ModelMessg>text}"
+                                timestamp="{path:'ModelMessg>date', type:'sap.ui.model.type.DateTime', formatOptions: { style: 'medium', strictParsing: true , UTC: true}}"
+                                convertLinksToAnchorTags="All"
+                            />
+                        </List>
+                        <FeedInput id="inputMessg" visible="false" iconInitials="Me" post="onPostMessg" class="sapUiSmallMarginTopBottom" />
+                    </Page>
+                </detailPages>
+                <masterPages>
+                    <Page id="master" title="Contacts">
+                        <List id="contactList" items="{ path: 'contacts>/', sorter: { path: 'contactName'} }" itemPress="onListPress">
+                            <items>
+                                <StandardListItem title="{contacts>contactName}" description="{contacts>phone}" icon="{contacts>photo}" iconDensityAware="false" iconInset="false" type="Navigation" />
+                            </items>
+                        </List>
+                    </Page>
+                </masterPages>
+            </SplitContainer>
+        </content>
+    </Page>
+</mvc:View>
